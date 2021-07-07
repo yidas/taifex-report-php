@@ -1,0 +1,5 @@
+{
+    "require": {
+        "yidas/tw-stock-crawler": "^1.1"
+    }
+}

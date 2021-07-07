@@ -1,0 +1,15 @@
+{
+    "name": "yidas/taifex-report",
+    "description": "Taiwan Futures Exchange difference report (臺灣期貨交易所差異報表)",
+    "keywords": ["php", "stock", "crawler", "TW Stock", "taifex"],
+    "homepage": "https://github.com/yidas/taifex-report-php",
+    "type": "project",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/yidas/taifex-report-php/issues",
+        "source": "https://github.com/yidas/taifex-report-php"
+    },
+    "require": {
+        "yidas/tw-stock-crawler": "^1.1"
+    }
+}

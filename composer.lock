@@ -1,0 +1,60 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "634859c11c7e809d0e68c6a01aff9917",
+    "packages": [
+        {
+            "name": "yidas/tw-stock-crawler",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yidas/tw-stock-crawler-php.git",
+                "reference": "515ae6f0e33601384fd9a1ea94fa8c60b99d58cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yidas/tw-stock-crawler-php/zipball/515ae6f0e33601384fd9a1ea94fa8c60b99d58cd",
+                "reference": "515ae6f0e33601384fd9a1ea94fa8c60b99d58cd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "yidas\\twStockCrawler\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Taiwan Stock Opendata Crawler with realtime - 台灣股市股票資訊擷取器",
+            "homepage": "https://github.com/yidas/tw-stock-crawler",
+            "keywords": [
+                "TW Stock",
+                "crawler",
+                "php",
+                "stock"
+            ],
+            "support": {
+                "issues": "https://github.com/yidas/tw-stock-crawler/issues",
+                "source": "https://github.com/yidas/tw-stock-crawler"
+            },
+            "time": "2021-07-09T08:57:36+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
+}

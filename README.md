@@ -40,7 +40,7 @@ Run Composer to create the project:
 
     composer create-project yidas/taifex-report
     
-Add the write permission of directories as below:
+Add the write permission to the following directories:
 
 ```
 /cache

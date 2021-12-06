@@ -21,6 +21,8 @@ DEMONSTRATION
 
 Demo Site: https://taifex-report.yidas.com/
 
+Crawl and calculate the difference report between the corporate futures data of the current day and the previous day from TAIFEX by access.
+
 ---
 
 REQUIREMENTS

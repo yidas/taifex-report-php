@@ -21,6 +21,8 @@ DEMONSTRATION
 
 Demo Site: https://taifex-report.yidas.com/
 
+Crawl and calculate the difference report between the current day and the previous day's Major Institutional Traders futures data from TAIFEX by accessing the website.
+
 ---
 
 REQUIREMENTS
@@ -38,7 +40,7 @@ Run Composer to create the project:
 
     composer create-project yidas/taifex-report
     
-Add the write permission of directories as below:
+Add the write permission to the following directories:
 
 ```
 /cache

@@ -430,7 +430,7 @@ function renderDiff($value, $title=false)
         <th scope="row" rowspan="3">TXO<br>Put</th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['put']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['put']['long']['volume']['dealers'])?></td>
-        <td><span class="value" title="Price: <?=$ref['put']['long']['price']['dealers']?>"><?=number_format($ref['put']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['put']['long']['value']['dealers'], $diff['put']['long']['price']['dealers'])?></td>
+        <td><span class="value" data-toggle="tooltip" data-placement="bottom" title="Price: <?=$ref['put']['long']['price']['dealers']?>"><?=number_format($ref['put']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['put']['long']['value']['dealers'], $diff['put']['long']['price']['dealers'])?></td>
         <td><span class="volume"><?=number_format($ref['put']['short']['volume']['dealers'])?></span><br><?=renderDiff($diff['put']['short']['volume']['dealers'])?></td>
         <td><span class="value" title="Price: <?=$ref['put']['short']['price']['dealers']?>"><?=number_format($ref['put']['short']['value']['dealers'])?></span><br><?=renderDiff($diff['put']['short']['value']['dealers'], $diff['put']['short']['price']['dealers'])?></td>
         <td><span class="volume"><?=number_format($ref['put']['net']['volume']['dealers'])?></span><br><?=renderDiff($diff['put']['net']['volume']['dealers'])?></td>
@@ -467,7 +467,12 @@ function renderDiff($value, $title=false)
     <p class="text-center">Powered by <a href="https://www.yidas.com" target="_blank">YIDAS</a></p>
   </div>
 
-
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
 </body>
 </html>

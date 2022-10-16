@@ -303,7 +303,7 @@ function renderDiff($value, $title=false)
     </thead>
     <tbody>
       <tr>
-        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/">TX</a><br><a target="_blank" href="https://www.wantgoo.com/futures/open-interest"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
+        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/">TX</a><br><a target="_blank" href="https://www.wantgoo.com/futures/open-interest"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['tx']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['tx']['long']['volume']['dealers'])?></td>
         <td><span class="value"><?=number_format($ref['tx']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['tx']['long']['value']['dealers'])?></td>
@@ -335,7 +335,7 @@ function renderDiff($value, $title=false)
       </tr>
       <tr>
       <tr>
-        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/FuturesDomestic/">MTX</a></th>
+        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/">MTX</a></th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['mtx']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['mtx']['long']['volume']['dealers'])?></td>
         <td><span class="value"><?=number_format($ref['mtx']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['mtx']['long']['value']['dealers'])?></td>
@@ -366,7 +366,7 @@ function renderDiff($value, $title=false)
         <th colspan="8"></th>
       </tr>
       <tr>
-        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/Options/">TXO</a><br><a target="_blank" href="https://www.wantgoo.com/option/support-resistance"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
+        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/Options/">TXO</a><br><a target="_blank" href="https://www.wantgoo.com/option/support-resistance"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['txo']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['txo']['long']['volume']['dealers'])?></td>
         <td><span class="value"><?=number_format($ref['txo']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['txo']['long']['value']['dealers'])?></td>
@@ -397,7 +397,7 @@ function renderDiff($value, $title=false)
         <th colspan="8"></th>
       </tr>
       <tr>
-        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/Options/">TXO</a><br>Call</th>
+        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/Options/">TXO</a><br>Call</th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['call']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['call']['long']['volume']['dealers'])?></td>
         <td><span class="value" data-toggle="tooltip" data-placement="bottom" title="Price: <?=$ref['call']['long']['price']['dealers']?>"><?=number_format($ref['call']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['call']['long']['value']['dealers'], $diff['call']['long']['price']['dealers'])?></td>
@@ -428,7 +428,7 @@ function renderDiff($value, $title=false)
         <th colspan="8"></th>
       </tr>
       <tr>
-        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/AfterHoursSession/EquityIndices/Options/">TXO</a><br>Put</th>
+        <th scope="row" rowspan="3"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/Options/">TXO</a><br>Put</th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['put']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['put']['long']['volume']['dealers'])?></td>
         <td><span class="value" data-toggle="tooltip" data-placement="top" title="Price: <?=$ref['put']['long']['price']['dealers']?>"><?=number_format($ref['put']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['put']['long']['value']['dealers'], $diff['put']['long']['price']['dealers'])?></td>

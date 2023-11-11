@@ -30,6 +30,7 @@ REQUIREMENTS
 This library requires the following:
 
 - PHP 5.4.0+\|7.0+
+- [yidas/tw-stock-crawler](https://github.com/yidas/tw-stock-crawler-php)
 
 ---
 

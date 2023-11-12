@@ -165,22 +165,8 @@ function calculateOptions(& $row)
  */
 function calculateOthers(& $row)
 {
-
-    $row['long']['volume']['others'] = ($row['short']['volume']['dealers'] > $row['long']['volume']['fini'])
-        ? $row['short']['volume']['dealers'] - $row['long']['volume']['fini']
-        : $row['short']['volume']['fini'] - $row['long']['volume']['dealers'];
-    $row['long']['value']['others'] = ($row['short']['value']['dealers'] > $row['long']['value']['fini'])
-        ? $row['short']['value']['dealers'] - $row['long']['value']['fini']
-        : $row['short']['value']['fini'] - $row['long']['value']['dealers'];
-
-    $row['short']['volume']['others'] = ($row['long']['volume']['dealers'] > $row['short']['volume']['fini'])
-        ? $row['long']['volume']['dealers'] - $row['short']['volume']['fini']
-        : $row['long']['volume']['fini'] - $row['short']['volume']['dealers'];
-    $row['short']['value']['others'] = ($row['long']['value']['dealers'] > $row['short']['value']['fini'])
-        ? $row['long']['value']['dealers'] - $row['short']['value']['fini']
-        : $row['long']['value']['fini'] - $row['short']['value']['dealers'];
-    $row['net']['volume']['others'] = 0 - $row['net']['volume']['dealers'] - $row['net']['volume']['fini'];
-    $row['net']['value']['others'] = 0 - $row['net']['value']['dealers'] - $row['net']['value']['fini'];
+    $row['net']['volume']['others'] = 0 - $row['net']['volume']['dealers'] - $row['net']['volume']['it'] - $row['net']['volume']['fini'];
+    $row['net']['value']['others'] = 0 - $row['net']['value']['dealers'] - $row['net']['value']['it'] - $row['net']['value']['fini'];
 }
 
 /**
@@ -188,7 +174,7 @@ function calculateOthers(& $row)
  */
 function calculateDiff(& $diffRow, $row)
 {
-    $roles = ['fini', 'dealers', 'others'];
+    $roles = ['dealers', 'it', 'fini', 'others'];
     foreach ($roles as $key => $role) {
         $diffRow['long']['volume'][$role] = $row['long']['volume'][$role] - $diffRow['long']['volume'][$role];
         $diffRow['long']['value'][$role] = $row['long']['value'][$role] - $diffRow['long']['value'][$role];
@@ -206,7 +192,7 @@ function calculateOptionPrice(& $row)
 {
     $types = ['call', 'put', 'options'];
     $cols = ['long', 'short', 'net'];
-    $roles = ['fini', 'dealers', 'others'];
+    $roles = ['dealers', 'it', 'fini', 'others'];
     foreach ($types as $key => $type) {
         foreach ($cols as $key => $col) {
             foreach ($roles as $key => $role) {
@@ -331,10 +317,10 @@ function renderDiff($value, $title=false)
       </tr>
       <tr class="striped">
         <th scope="row">Others</th>
-        <td><span class="volume"><?=number_format($ref['tx']['long']['volume']['others'])?></span><br><?=renderDiff($diff['tx']['long']['volume']['others'])?></td>
-        <td><span class="value"><?=number_format($ref['tx']['long']['value']['others'])?></span><br><?=renderDiff($diff['tx']['long']['value']['others'])?></td>
-        <td><span class="volume"><?=number_format($ref['tx']['short']['volume']['others'])?></span><br><?=renderDiff($diff['tx']['short']['volume']['others'])?></td>
-        <td><span class="value"><?=number_format($ref['tx']['short']['value']['others'])?></span><br><?=renderDiff($diff['tx']['short']['value']['others'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
         <td><span class="volume"><?=number_format($ref['tx']['net']['volume']['others'])?></span><br><?=renderDiff($diff['tx']['net']['volume']['others'])?></td>
         <td><span class="value"><?=number_format($ref['tx']['net']['value']['others'])?></span><br><?=renderDiff($diff['tx']['net']['value']['others'])?></td>
       </tr>
@@ -372,10 +358,10 @@ function renderDiff($value, $title=false)
       </tr>
       <tr class="striped">
         <th scope="row">Others</th>
-        <td><span class="volume"><?=number_format($ref['mtx']['long']['volume']['others'])?></span><br><?=renderDiff($diff['mtx']['long']['volume']['others'])?></td>
-        <td><span class="value"><?=number_format($ref['mtx']['long']['value']['others'])?></span><br><?=renderDiff($diff['mtx']['long']['value']['others'])?></td>
-        <td><span class="volume"><?=number_format($ref['mtx']['short']['volume']['others'])?></span><br><?=renderDiff($diff['mtx']['short']['volume']['others'])?></td>
-        <td><span class="value"><?=number_format($ref['mtx']['short']['value']['others'])?></span><br><?=renderDiff($diff['mtx']['short']['value']['others'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
         <td><span class="volume"><?=number_format($ref['mtx']['net']['volume']['others'])?></span><br><?=renderDiff($diff['mtx']['net']['volume']['others'])?></td>
         <td><span class="value"><?=number_format($ref['mtx']['net']['value']['others'])?></span><br><?=renderDiff($diff['mtx']['net']['value']['others'])?></td>
       </tr>
@@ -412,10 +398,10 @@ function renderDiff($value, $title=false)
       </tr>
       <tr class="striped">
         <th scope="row">Others</th>
-        <td><span class="volume"><?=number_format($ref['txo']['long']['volume']['others'])?></span><br><?=renderDiff($diff['txo']['long']['volume']['others'])?></td>
-        <td><span class="value"><?=number_format($ref['txo']['long']['value']['others'])?></span><br><?=renderDiff($diff['txo']['long']['value']['others'])?></td>
-        <td><span class="volume"><?=number_format($ref['txo']['short']['volume']['others'])?></span><br><?=renderDiff($diff['txo']['short']['volume']['others'])?></td>
-        <td><span class="value"><?=number_format($ref['txo']['short']['value']['others'])?></span><br><?=renderDiff($diff['txo']['short']['value']['others'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
         <td><span class="volume"><?=number_format($ref['txo']['net']['volume']['others'])?></span><br><?=renderDiff($diff['txo']['net']['volume']['others'])?></td>
         <td><span class="value"><?=number_format($ref['txo']['net']['value']['others'])?></span><br><?=renderDiff($diff['txo']['net']['value']['others'])?></td>
       </tr>
@@ -452,10 +438,10 @@ function renderDiff($value, $title=false)
       </tr>
       <tr class="striped">
         <th scope="row">Others</th>
-        <td><span class="volume"><?=number_format($ref['call']['long']['volume']['others'])?></span><br><?=renderDiff($diff['call']['long']['volume']['others'])?></td>
-        <td><span class="value" data-toggle="tooltip" data-placement="bottom" title="Price: <?=$ref['call']['long']['price']['others']?>"><?=number_format($ref['call']['long']['value']['others'])?></span><br><?=renderDiff($diff['call']['long']['value']['others'], $diff['call']['long']['price']['others'])?></td>
-        <td><span class="volume"><?=number_format($ref['call']['short']['volume']['others'])?></span><br><?=renderDiff($diff['call']['short']['volume']['others'])?></td>
-        <td><span class="value" data-toggle="tooltip" data-placement="bottom" title="Price: <?=$ref['call']['short']['price']['others']?>"><?=number_format($ref['call']['short']['value']['others'])?></span><br><?=renderDiff($diff['call']['short']['value']['others'], $diff['call']['short']['price']['others'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
         <td><span class="volume"><?=number_format($ref['call']['net']['volume']['others'])?></span><br><?=renderDiff($diff['call']['net']['volume']['others'])?></td>
         <td><span class="value" data-toggle="tooltip" data-placement="bottom" title="Price: <?=$ref['call']['net']['price']['others']?>"><?=number_format($ref['call']['net']['value']['others'])?></span><br><?=renderDiff($diff['call']['net']['value']['others'], $diff['call']['net']['price']['others'])?></td>
       </tr>
@@ -492,10 +478,10 @@ function renderDiff($value, $title=false)
       </tr>
       <tr class="striped">
         <th scope="row">Others</th>
-        <td><span class="volume"><?=number_format($ref['put']['long']['volume']['others'])?></span><br><?=renderDiff($diff['put']['long']['volume']['others'])?></td>
-        <td><span class="value" data-toggle="tooltip" data-placement="bottom" title="Price: <?=$ref['put']['long']['price']['others']?>"><?=number_format($ref['put']['long']['value']['others'])?></span><br><?=renderDiff($diff['put']['long']['value']['others'], $diff['put']['long']['price']['others'])?></td>
-        <td><span class="volume"><?=number_format($ref['put']['short']['volume']['others'])?></span><br><?=renderDiff($diff['put']['short']['volume']['others'])?></td>
-        <td><span class="value" data-toggle="tooltip" data-placement="bottom" title="Price: <?=$ref['put']['short']['price']['others']?>"><?=number_format($ref['put']['short']['value']['others'])?></span><br><?=renderDiff($diff['put']['short']['value']['others'], $diff['put']['short']['price']['others'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
         <td><span class="volume"><?=number_format($ref['put']['net']['volume']['others'])?></span><br><?=renderDiff($diff['put']['net']['volume']['others'])?></td>
         <td><span class="value" data-toggle="tooltip" data-placement="bottom" title="Price: <?=$ref['put']['net']['price']['others']?>"><?=number_format($ref['put']['net']['value']['others'])?></span><br><?=renderDiff($diff['put']['net']['value']['others'], $diff['put']['net']['price']['others'])?></td>
       </tr>

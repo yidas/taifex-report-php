@@ -15,12 +15,14 @@ $data = processData();
 
 // Shortcut
 $ref = [];
+$ref['trx'] = & $data['current']['twse']['trx'];
 $ref['tx'] = & $data['current']['future']['tx']['oi'];
 $ref['mtx'] = & $data['current']['future']['mtx']['oi'];
 $ref['txo'] = & $data['current']['option']['txo']['options']['oi'];
 $ref['call'] = & $data['current']['option']['txo']['call']['oi'];
 $ref['put'] = & $data['current']['option']['txo']['put']['oi'];
 $diff = [];
+$diff['trx'] = & $data['diff']['twse']['trx'];
 $diff['tx'] = & $data['diff']['future']['tx']['oi'];
 $diff['mtx'] = & $data['diff']['future']['mtx']['oi'];
 $diff['txo'] = & $data['diff']['option']['txo']['options']['oi'];
@@ -60,6 +62,7 @@ function processData()
 
         // Init parser
         $parser = \yidas\twStockCrawler\TaifexCrawler::config();
+        $parserTwse = \yidas\twStockCrawler\Crawler::config(['source' => 'twse']);
 
         // TAIFEX's renew time is 15:00 GMT+8
         $crawlDiffDays = (date("H") >= 15) ? 0 : 1;
@@ -83,6 +86,7 @@ function processData()
             return $cacheData['data'];
         }
         $data['current']['date'] = $response['date'];
+        $data['current']['twse'] = $parserTwse::getDailyTradingSummarys(date(DATE_FORMAT, strtotime("-{$crawlDiffDays} days")));
         $data['current']['future'] = $response;
         $data['current']['option'] = $parser::getOptions(date(DATE_FORMAT, strtotime("-{$crawlDiffDays} days")));
         // print_r($data);exit;
@@ -102,6 +106,7 @@ function processData()
         }
 
         $data['diff']['date'] = $response['date'];
+        $data['diff']['twse'] = $parserTwse::getDailyTradingSummarys(date(DATE_FORMAT, strtotime("-{$crawlDiffDays} days")));
         $data['diff']['future'] = $response;
         $data['diff']['option'] = $parser::getOptions(date(DATE_FORMAT, strtotime("-{$crawlDiffDays} days")));
 
@@ -119,6 +124,7 @@ function processData()
         calculateOthers($data['diff']['future']['mtx']['oi']);
         calculateOthers($data['diff']['option']['txo']['call']['oi']);
         calculateOthers($data['diff']['option']['txo']['put']['oi']);
+        calculateDiff($data['diff']['twse']['trx'], $data['current']['twse']['trx']);
         calculateDiff($data['diff']['future']['tx']['oi'], $data['current']['future']['tx']['oi']);
         calculateDiff($data['diff']['future']['mtx']['oi'], $data['current']['future']['mtx']['oi']);
         calculateDiff($data['diff']['option']['txo']['call']['oi'], $data['current']['option']['txo']['call']['oi']);
@@ -151,10 +157,10 @@ function calculateOptions(& $row)
 {
     $roles = ['dealers', 'it', 'fini', 'others'];
     foreach ($roles as $key => $role) {
-        $row['options']['oi']['long']['volume'][$role] = $row['call']['oi']['long']['volume'][$role] + $row['put']['oi']['short']['volume'][$role];
-        $row['options']['oi']['long']['value'][$role] = $row['call']['oi']['long']['value'][$role] + $row['put']['oi']['short']['value'][$role];
-        $row['options']['oi']['short']['volume'][$role] = $row['call']['oi']['short']['volume'][$role] + $row['put']['oi']['long']['volume'][$role];
-        $row['options']['oi']['short']['value'][$role] = $row['call']['oi']['short']['value'][$role] + $row['put']['oi']['long']['value'][$role];
+        $row['options']['oi']['long']['volume'][$role] = isset($row['call']['oi']['long']['volume'][$role]) ? $row['call']['oi']['long']['volume'][$role] + $row['put']['oi']['short']['volume'][$role] : null;
+        $row['options']['oi']['long']['value'][$role] = isset($row['call']['oi']['long']['value'][$role]) ? $row['call']['oi']['long']['value'][$role] + $row['put']['oi']['short']['value'][$role] : null;
+        $row['options']['oi']['short']['volume'][$role] = isset($row['call']['oi']['short']['volume'][$role]) ? $row['call']['oi']['short']['volume'][$role] + $row['put']['oi']['long']['volume'][$role] : null;
+        $row['options']['oi']['short']['value'][$role] = isset($row['call']['oi']['short']['value'][$role]) ? $row['call']['oi']['short']['value'][$role] + $row['put']['oi']['long']['value'][$role] : null;
         $row['options']['oi']['net']['volume'][$role] = $row['options']['oi']['long']['volume'][$role] - $row['options']['oi']['short']['volume'][$role];
         $row['options']['oi']['net']['value'][$role] = $row['options']['oi']['long']['value'][$role] - $row['options']['oi']['short']['value'][$role];
     }
@@ -176,11 +182,11 @@ function calculateDiff(& $diffRow, $row)
 {
     $roles = ['dealers', 'it', 'fini', 'others'];
     foreach ($roles as $key => $role) {
-        $diffRow['long']['volume'][$role] = $row['long']['volume'][$role] - $diffRow['long']['volume'][$role];
-        $diffRow['long']['value'][$role] = $row['long']['value'][$role] - $diffRow['long']['value'][$role];
-        $diffRow['short']['volume'][$role] = $row['short']['volume'][$role] - $diffRow['short']['volume'][$role];
-        $diffRow['short']['value'][$role] = $row['short']['value'][$role] - $diffRow['short']['value'][$role];
-        $diffRow['net']['volume'][$role] = $row['net']['volume'][$role] - $diffRow['net']['volume'][$role];
+        $diffRow['long']['volume'][$role] = isset($row['long']['volume'][$role]) ? $row['long']['volume'][$role] - $diffRow['long']['volume'][$role] : null;
+        $diffRow['long']['value'][$role] = isset($row['long']['value'][$role]) ? $row['long']['value'][$role] - $diffRow['long']['value'][$role] : null;
+        $diffRow['short']['volume'][$role] = isset($row['short']['volume'][$role]) ? $row['short']['volume'][$role] - $diffRow['short']['volume'][$role] : null;
+        $diffRow['short']['value'][$role] = isset($row['short']['value'][$role]) ? $row['short']['value'][$role] - $diffRow['short']['value'][$role] : null;
+        $diffRow['net']['volume'][$role] = isset($row['net']['volume'][$role]) ? $row['net']['volume'][$role] - $diffRow['net']['volume'][$role] : null;
         $diffRow['net']['value'][$role] = $row['net']['value'][$role] - $diffRow['net']['value'][$role];
     }
 }
@@ -197,6 +203,9 @@ function calculateOptionPrice(& $row)
         foreach ($cols as $key => $col) {
             foreach ($roles as $key => $role) {
                 // Value unit: 1000; Price unit: 50
+                if (!isset($row[$type]['oi'][$col]['volume'][$role])) {
+                    break;
+                }
                 $row[$type]['oi'][$col]['price'][$role] = ($row[$type]['oi'][$col]['volume'][$role]) ? abs(round($row[$type]['oi'][$col]['value'][$role] / $row[$type]['oi'][$col]['volume'][$role] * 1000 / 50)) : 0;
             }
         }
@@ -287,6 +296,46 @@ function renderDiff($value, $title=false)
       </tr>
     </thead>
     <tbody>
+    <tr>
+        <th scope="row" rowspan="4"><a target="_blank" href="https://www.twse.com.tw/zh/trading/foreign/bfi82u.html">TRX</a><br><a target="_blank" href="https://www.wantgoo.com/stock/institutional-investors/three-trade-for-trading-amount"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
+        <th scope="row">Dealers</th>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['trx']['long']['value']['dealers'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['short']['value']['dealers'])?></span><br><?=renderDiff($diff['trx']['short']['value']['dealers'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['net']['value']['dealers'])?></span><br><?=renderDiff($diff['trx']['net']['value']['dealers'])?></td>
+      </tr>
+      <tr>
+        <th scope="row">Investment<br/>Trust</th>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['long']['value']['it'])?></span><br><?=renderDiff($diff['trx']['long']['value']['it'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['short']['value']['it'])?></span><br><?=renderDiff($diff['trx']['short']['value']['it'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['net']['value']['it'])?></span><br><?=renderDiff($diff['trx']['net']['value']['it'])?></td>
+      </tr>
+      <tr>
+        <th scope="row">FINI</th>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['long']['value']['fini'])?></span><br><?=renderDiff($diff['trx']['long']['value']['fini'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['short']['value']['fini'])?></span><br><?=renderDiff($diff['trx']['short']['value']['fini'])?></td>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['net']['value']['fini'])?></span><br><?=renderDiff($diff['trx']['net']['value']['fini'])?></td>
+      </tr>
+      <tr class="striped">
+        <th scope="row">Others</th>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
+        <td><span class="volume"></td>
+        <td><span class="value"></td>
+        <td><span class="volume"></td>
+        <td><span class="value"><?=number_format($ref['trx']['net']['value']['others'])?></span><br><?=renderDiff($diff['trx']['net']['value']['others'])?></td>
+      </tr>
+      <tr>
+        <th colspan="8"></th>
+      </tr>
       <tr>
         <th scope="row" rowspan="4"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/">TX</a><br><a target="_blank" href="https://www.wantgoo.com/futures/open-interest"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
         <th scope="row">Dealers</th>

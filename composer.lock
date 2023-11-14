@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "yidas/tw-stock-crawler",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yidas/tw-stock-crawler-php.git",
-                "reference": "0a96dc2682faa1703021bd3f896d1fbb0477ed4c"
+                "reference": "9a378828d7031356817c213a77253eae849f7751"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidas/tw-stock-crawler-php/zipball/0a96dc2682faa1703021bd3f896d1fbb0477ed4c",
-                "reference": "0a96dc2682faa1703021bd3f896d1fbb0477ed4c",
+                "url": "https://api.github.com/repos/yidas/tw-stock-crawler-php/zipball/9a378828d7031356817c213a77253eae849f7751",
+                "reference": "9a378828d7031356817c213a77253eae849f7751",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "issues": "https://github.com/yidas/tw-stock-crawler/issues",
                 "source": "https://github.com/yidas/tw-stock-crawler"
             },
-            "time": "2023-11-11T02:00:16+00:00"
+            "time": "2023-11-14T16:38:32+00:00"
         }
     ],
     "packages-dev": [],

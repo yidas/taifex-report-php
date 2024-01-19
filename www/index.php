@@ -297,7 +297,7 @@ function renderDiff($value, $title=false)
     </thead>
     <tbody>
     <tr>
-        <th scope="row" rowspan="4"><a target="_blank" href="https://www.twse.com.tw/zh/trading/foreign/bfi82u.html">TRX</a><br><a target="_blank" href="https://www.wantgoo.com/stock/institutional-investors/three-trade-for-trading-amount"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
+        <th scope="row" rowspan="4"><a target="_blank" href="https://www.twse.com.tw/zh/trading/foreign/bfi82u.html">TRX</a><br><a target="_blank" href="https://www.wantgoo.com/stock/institutional-investors/three-trade-for-trading-amount"><img src="./img/chart-line.svg" data-toggle="tooltip" title="Chart by Wantgoo" width="12"></a></th>
         <th scope="row">Dealers</th>
         <td><span class="volume"></td>
         <td><span class="value"><?=number_format($ref['trx']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['trx']['long']['value']['dealers'])?></td>
@@ -337,7 +337,7 @@ function renderDiff($value, $title=false)
         <th colspan="8"></th>
       </tr>
       <tr>
-        <th scope="row" rowspan="4"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/">TX</a><br><a target="_blank" href="https://www.wantgoo.com/futures/open-interest"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
+        <th scope="row" rowspan="4"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/">TX</a><br><a target="_blank" href="https://www.wantgoo.com/futures/open-interest"><img src="./img/chart-line.svg" data-toggle="tooltip" title="Chart by Wantgoo" width="12"></a></th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['tx']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['tx']['long']['volume']['dealers'])?></td>
         <td><span class="value"><?=number_format($ref['tx']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['tx']['long']['value']['dealers'])?></td>
@@ -378,7 +378,7 @@ function renderDiff($value, $title=false)
       </tr>
       <tr>
       <tr>
-        <th scope="row" rowspan="4"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/">MTX</a></th>
+        <th scope="row" rowspan="4"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/FuturesDomestic/">MTX</a><br><a target="_blank" href="https://www.taifex.com.tw/enl/eng3/futContractsDateAh"><img src="./img/detail.png" data-toggle="tooltip" title="Adter Hours Trading by TAIFEX" width="15"></a></th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['mtx']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['mtx']['long']['volume']['dealers'])?></td>
         <td><span class="value"><?=number_format($ref['mtx']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['mtx']['long']['value']['dealers'])?></td>
@@ -418,7 +418,7 @@ function renderDiff($value, $title=false)
         <th colspan="8"></th>
       </tr>
       <tr>
-        <th scope="row" rowspan="4"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/Options/">TXO</a><br><a target="_blank" href="https://www.wantgoo.com/option/support-resistance"><img src="./img/chart-line.svg" alt="Chart" width="12"></a></th>
+        <th scope="row" rowspan="4"><a target="_blank" href="https://mis.taifex.com.tw/futures/RegularSession/EquityIndices/Options/">TXO</a><br><a target="_blank" href="https://www.wantgoo.com/option/support-resistance"><img src="./img/chart-line.svg" data-toggle="tooltip" title="Chart by Wantgoo" width="12"></a><br><a target="_blank" href="https://www.taifex.com.tw/enl/eng3/callsAndPutsDateAh"><img src="./img/detail.png" data-toggle="tooltip" title="Adter Hours Trading by TAIFEX" width="15"></a></th>
         <th scope="row">Dealers</th>
         <td><span class="volume"><?=number_format($ref['txo']['long']['volume']['dealers'])?></span><br><?=renderDiff($diff['txo']['long']['volume']['dealers'])?></td>
         <td><span class="value"><?=number_format($ref['txo']['long']['value']['dealers'])?></span><br><?=renderDiff($diff['txo']['long']['value']['dealers'])?></td>
